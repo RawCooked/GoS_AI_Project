@@ -1,131 +1,88 @@
-# GoS_AI_Project
+# 🧠 Math Creativity Detector
 
-## 🧠 Deep Learning Model: Image Classification & Object Detection
-
-This project aims to develop a **deep learning model** that performs **image classification** and **object detection**. Below is a structured guide to building the project step by step.
+A deep learning pipeline that extracts mathematical expressions from handwritten images, verifies the correctness of answers, and evaluates creativity using a **BERT-based NLP model**. This project is designed for analyzing children's mathematical problem-solving approaches (ages 5-10). 🚀
 
 ---
 
-## 📌 Table of Contents
-- [📂 Project Setup](#-project-setup)
-- [📊 Data Collection & Preprocessing](#-data-collection--preprocessing)
-- [🛠 Model Development](#-model-development)
-- [🎯 Training & Evaluation](#-training--evaluation)
-- [🚀 Deployment](#-deployment)
-- [📌 Future Improvements](#-future-improvements)
+## 📌 Features
+✅ **OCR Processing** – Extracts handwritten text and equations from images using Tesseract OCR.  
+✅ **Mathematical Verification** – Solves equations and checks if the given answer is correct.  
+✅ **Creativity Detection** – Uses a fine-tuned BERT model to classify responses as **Creative** or **Non-Creative**.  
+✅ **End-to-End Pipeline** – Combines text extraction, answer verification, and creativity assessment.  
 
 ---
 
-## 📂 Project Setup
-
-### 1️⃣ **Set Up the Environment**
-- Install necessary dependencies:
-  ```bash
-  pip install tensorflow keras torch torchvision opencv-python matplotlib numpy pandas scikit-learn
-  ```
-- Create a virtual environment (optional but recommended):
-  ```bash
-  python -m venv gos_ai_env
-  source gos_ai_env/bin/activate  # On Windows: gos_ai_env\Scripts\activate
-  ```
-
----
-
-## 📊 Data Collection & Preprocessing
-
-### 2️⃣ **Collect & Organize Data**
-- Collect images from **open datasets** (e.g., COCO, ImageNet, custom datasets).
-- Organize the dataset into:
-  ```
-  /dataset
-     /train
-         /class_1
-         /class_2
-     /test
-         /class_1
-         /class_2
-  ```
-
-### 3️⃣ **Data Preprocessing**
-- Resize images for consistency (`224x224` for CNNs).
-- Normalize pixel values (`0-1` scale).
-- Data augmentation (rotation, flipping, scaling) to improve generalization.
-
-```python
-import tensorflow as tf
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-
-datagen = ImageDataGenerator(rescale=1./255, rotation_range=30, horizontal_flip=True)
-train_data = datagen.flow_from_directory("dataset/train", target_size=(224, 224), batch_size=32)
-```
-
----
-
-## 🛠 Model Development
-
-### 4️⃣ **Choose a Pretrained Model or Build One**
-#### ✅ **For Image Classification**
-- Use **CNN-based models** like ResNet, VGG16, MobileNet:
-```python
-from tensorflow.keras.applications import ResNet50
-
-model = ResNet50(weights="imagenet", include_top=False, input_shape=(224, 224, 3))
-```
-#### ✅ **For Object Detection**
-- Use **YOLOv5, Faster R-CNN, or SSD**:
+## 📂 Project Structure
 ```bash
-git clone https://github.com/ultralytics/yolov5.git
-cd yolov5
+📁 Math-Creativity-Detector
+│── 📂 models            # Pre-trained BERT models
+│── 📂 data              # Sample images and datasets
+│── 📂 src               # Source code
+│    │── ocr.py         # OCR extraction module
+│    │── solver.py      # Equation solver
+│    │── bert_model.py  # Creativity detection with BERT
+│    │── main.py        # Full pipeline execution
+│── README.md           # Project documentation
+│── requirements.txt    # Python dependencies
+```
+
+---
+
+## 🚀 Installation
+
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/your-username/Math-Creativity-Detector.git
+cd Math-Creativity-Detector
+```
+
+### 2️⃣ Install Dependencies
+```bash
 pip install -r requirements.txt
 ```
 
----
-
-## 🎯 Training & Evaluation
-
-### 5️⃣ **Train the Model**
-- Compile and train the model:
-```python
-model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
-model.fit(train_data, epochs=10, validation_data=test_data)
-```
-- For **YOLO training**:
+### 3️⃣ Install Tesseract OCR
+**Windows:** Download from [here](https://github.com/UB-Mannheim/tesseract/wiki) and add to PATH.  
+**Linux/macOS:**
 ```bash
-python train.py --data custom_dataset.yaml --weights yolov5s.pt --epochs 50
-```
-
-### 6️⃣ **Evaluate Performance**
-- Check **accuracy, precision, recall, F1-score**.
-- Visualize results:
-```python
-import matplotlib.pyplot as plt
-plt.plot(history.history['accuracy'], label='accuracy')
-plt.legend()
-plt.show()
+sudo apt install tesseract-ocr
 ```
 
 ---
 
-## 🚀 Deployment
-
-### 7️⃣ **Convert Model for Deployment**
-- Convert to **TensorFlow Lite** or **ONNX** for real-time inference.
+## 🛠️ Usage
+Run the full pipeline on an image containing handwritten math responses:
 ```bash
-python export.py --weights best.pt --include onnx
+python src/main.py --image path/to/your/image.jpg
 ```
-- Deploy using **Flask, FastAPI, or Streamlit**.
+
+Example output:
+```
+Extracted Text: "I used a drawing to solve 5 + 3 = 8"
+Extracted Equation: "5 + 3 = 8"
+Correctness: ✅ Correct
+Creativity Classification: 🎨 Creative
+```
 
 ---
 
-## 📌 Future Improvements
-- Implement **self-supervised learning**.
-- Improve **real-time performance** with model quantization.
-- Integrate **edge computing** (ESP32, Raspberry Pi).
-- Optimize **energy-efficient AI models**.
+## 🧑‍💻 Contributing
+We welcome contributions! To contribute:
+1. **Fork** the repo.
+2. **Create a branch** for your feature (`git checkout -b feature-name`).
+3. **Commit your changes** (`git commit -m 'Added new feature'`).
+4. **Push** to your branch (`git push origin feature-name`).
+5. **Open a pull request** 🚀.
 
 ---
 
-## 📝 Authors
-- **Your Name** | [GitHub](https://github.com/your-profile) | [LinkedIn](https://linkedin.com/in/your-profile)
+## 📝 License
+This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
 
 ---
+
+## 📬 Contact
+For questions or feedback, reach out at **your.email@example.com** or open an issue!
+
+⭐ **If you like this project, don't forget to star the repo!** ⭐
+
