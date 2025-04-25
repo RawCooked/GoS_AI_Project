@@ -1,8 +1,27 @@
-Local Hosting for Model, 2 Models included ".plk" 
+# Django API for Deep Learning Model
 
-http://127.0.0.1:8000/classify_lab_event/?value=value1&valuenum=value2
+This is a simple Django REST API to serve predictions from a deep learning model.
 
-exp :
- http://127.0.0.1:8000/classify_lab_event/?value=3.4&valuenum=3
+## Setup
 
-To start RUN THE BATCH FILE to init the env and runserver
+```bash
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
+
+## Usage
+
+Send a POST request to:
+```
+http://127.0.0.1:8000/predict/
+```
+
+With JSON data:
+```json
+{
+  "input": [1.0, 2.0, 3.0]
+}
+```
