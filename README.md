@@ -17,7 +17,7 @@
 ## 🛠️ Tech Stack
 
 ### 🔹 Frontend
-- **Angular** (for future real-time monitoring dashboard or visual results display)
+- **React** (for future real-time monitoring dashboard or visual results display)
 
 ### 🔹 Backend
 - **Django** (REST API for serving predictions and managing models)
@@ -72,9 +72,9 @@ This is how this Repo is organized
 ---
 
 ## 👥 Authors
-- **idriss Ben Moussa ( RawCooked ) ** | [GitHub](https://github.com/RawCooked) 
-- **Achref Baaboura** | [GitHub](https://github.com/RawCooked) 
-- **Khalil Tombari** | [GitHub](https://github.com/RawCooked) 
+- **idriss Ben Moussa ( RawCooked )** | [GitHub](https://github.com/RawCooked) 
+- **Achref Baaboura** | [GitHub](https://github.com/Baaboura) 
+- **Khalil Tombari** | [GitHub](https://github.com/khalilou123) 
 - **Heni Ouerfelli** | [GitHub](https://github.com/RawCooked) 
-- **Maha Mansi** | [GitHub](https://github.com/RawCooked) 
+- **Maha Mansi** | [GitHub](https://github.com/MahaMensi) 
 - **Azer Fattouch** | [GitHub](https://github.com/RawCooked) 
