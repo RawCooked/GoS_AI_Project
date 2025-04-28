@@ -8,10 +8,8 @@
 
 ## ✨ Features
 - ✅ Image classification using pretrained CNN models (ResNet, VGG16, MobileNet)
-- 🎯 Object detection with YOLOv5 and custom datasets
-- 🔄 Real-time data augmentation
+- 🎯 Image Classification with custom datasets
 - 📊 Performance metrics visualization (Accuracy, F1-Score, etc.)
-- 🚀 Deployment-ready formats (ONNX, TFLite)
 - 🧠 Future-ready with support for self-supervised learning and edge deployment
 
 ---
@@ -19,125 +17,64 @@
 ## 🛠️ Tech Stack
 
 ### 🔹 Frontend
-- **Angular** (for future real-time monitoring dashboard or visual results display)
+- **React** (for future real-time monitoring dashboard or visual results display)
 
 ### 🔹 Backend
 - **Django** (REST API for serving predictions and managing models)
 
 ### 🔹 Deep Learning Frameworks
 - **TensorFlow** / **Keras**
-- **PyTorch** (for YOLOv5)
+- **PyTorch**
 
 ### 🔹 Other Tools
 - OpenCV – Image manipulation  
 - Matplotlib, Seaborn – Visualization  
 - Pandas, NumPy – Data manipulation  
 - Scikit-learn – Evaluation metrics  
-- Flask / FastAPI / Streamlit – Lightweight deployment (optional)
+- Flask / FastAPI – Lightweight deployment 
+- Unsloth / LoRA - llm fine tuning
 
 ---
 
 ## 🚀 Getting Started
+- [**Click Me !**](https://github.com/RawCooked/GoS_AI_Project/tree/Act/Act) 
 
-### 1️⃣ Set Up the Environment
-```bash
-# Create and activate virtual environment (recommended)
-python -m venv gos_ai_env
-source gos_ai_env/bin/activate  # Windows: gos_ai_env\Scripts\activate
-
-# Install dependencies
-pip install tensorflow keras torch torchvision opencv-python matplotlib numpy pandas scikit-learn
-```
-
-### 2️⃣ Collect & Organize Data
-Organize your images like this:
+### 2️⃣ Github Organization
+This is how this Repo is organized
 ```
 /dataset
-   /train
-       /class_1
-       /class_2
-   /test
-       /class_1
-       /class_2
+     /Act
+          /Artistical-talent-detection
+               /Datasets
+               /Notebooks
+          /Mathematical-logical-thinking
+               /Notebooks
+          /Singing-talent-detection
+               /Notebooks
+               /Datasets
+                    /Audio-Preview
+     /Engage
+     /Investigate
 ```
 
-### 3️⃣ Preprocess Data
-```python
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
-datagen = ImageDataGenerator(rescale=1./255, rotation_range=30, horizontal_flip=True)
-train_data = datagen.flow_from_directory("dataset/train", target_size=(224, 224), batch_size=32)
-```
-
----
-
-## 🧪 Model Development
-
-### 🔍 Image Classification (CNN-based)
-```python
-from tensorflow.keras.applications import ResNet50
-model = ResNet50(weights="imagenet", include_top=False, input_shape=(224, 224, 3))
-```
-
-### 🧭 Object Detection (YOLOv5)
-```bash
-git clone https://github.com/ultralytics/yolov5.git
-cd yolov5
-pip install -r requirements.txt
-```
-
----
-
-## 🎓 Training & Evaluation
-
-### 📈 Train the Model
-```python
-model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
-model.fit(train_data, epochs=10, validation_data=test_data)
-```
-
-### 🚀 Train YOLOv5
-```bash
-python train.py --data custom_dataset.yaml --weights yolov5s.pt --epochs 50
-```
-
-### 📊 Evaluate Results
-```python
-import matplotlib.pyplot as plt
-plt.plot(history.history['accuracy'], label='accuracy')
-plt.legend()
-plt.show()
-```
-
----
-
-## 🌐 Deployment
-
-### 🧩 Export Model for Inference
-```bash
-python export.py --weights best.pt --include onnx
-```
-
-### 🧪 Deploy via:
-- Flask / FastAPI (API interface)
-- Streamlit (interactive frontend)
-- TensorFlow Lite / ONNX for mobile or embedded devices
-
----
 
 ## 🚧 Future Improvements
 - 📚 Self-supervised learning for semi-labeled datasets
 - ⚡ Real-time optimization (quantization, pruning)
-- 🧠 Edge deployment on ESP32, Raspberry Pi
+- 🧠 Edge deployment on Raspberry Pi
 - 🔋 Energy-efficient architectures
 
 ---
 
 ## 🙌 Acknowledgments
-- Inspired by **YOLOv5** & **TensorFlow Hub** & **Personal Experiences**
-- Dataset sources:  [ImageNet](https://www.image-net.org)
-
+- Inspired by **Our Dear Professors** (❁´◡`❁)  &  **Personal Experiences**
 ---
 
 ## 👥 Authors
-- **GoS** | [GitHub](https://github.com/RawCooked) 
+- **idriss Ben Moussa ( RawCooked )** | [GitHub](https://github.com/RawCooked) 
+- **Achref Baaboura** | [GitHub](https://github.com/Baaboura) 
+- **Khalil Tombari** | [GitHub](https://github.com/khalilou123) 
+- **Heni Ouerfelli** | [GitHub](https://github.com/RawCooked) 
+- **Maha Mansi** | [GitHub](https://github.com/MahaMensi) 
+- **Azer Fattouch** | [GitHub](https://github.com/RawCooked) 
