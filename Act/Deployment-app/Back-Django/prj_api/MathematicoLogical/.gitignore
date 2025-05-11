@@ -1,3 +1,2 @@
-belle_voix_model.h5
-model.h5
-my_model.pt
+*.h5
+*.pt
