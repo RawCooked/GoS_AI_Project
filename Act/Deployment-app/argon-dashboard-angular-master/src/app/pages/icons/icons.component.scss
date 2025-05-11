@@ -1,0 +1,28 @@
+/* Add these styles to your existing SCSS */
+.form-control-label {
+    font-weight: 600;
+    color: #3d3d3d;
+  }
+  
+  .custom-file-label::after {
+    background-color: #f5365c;
+    color: white;
+    border-left: 0;
+    content: "Browse";
+  }
+  
+  .btn-danger {
+    transition: all 0.3s ease;
+    padding: 12px 30px;
+    border-radius: 25px;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(245, 54, 92, 0.4);
+    }
+    
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }

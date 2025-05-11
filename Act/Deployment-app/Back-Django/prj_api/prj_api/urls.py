@@ -19,7 +19,7 @@ urlpatterns = [
         path('api/drawing/maha/', views.predict_view, name='predict'),
         path('api/audio/khalil/', views.predict_audio_view, name='predict_audio'),
         path('api/drawing/achref/', views.predict_drawing, name='predict_drawing'),
-        #path('api/math/idriss', views.generate_text_view, name='generate_text'),
+        path('api/math/idriss/', views.generate_text_view, name='generate_text'),
 
 
 

@@ -1,0 +1,227 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+      <div class="row">
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Traffic</h5>
+                  <span class="h2 font-weight-bold mb-0">350,897</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                    <i class="fas fa-chart-bar"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-muted text-sm">
+                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                <span class="text-nowrap">Since last month</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">New users</h5>
+                  <span class="h2 font-weight-bold mb-0">2,356</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                    <i class="fas fa-chart-pie"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-muted text-sm">
+                <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
+                <span class="text-nowrap">Since last week</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Sales</h5>
+                  <span class="h2 font-weight-bold mb-0">924</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                    <i class="fas fa-users"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-muted text-sm">
+                <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
+                <span class="text-nowrap">Since yesterday</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
+                  <span class="h2 font-weight-bold mb-0">49,65%</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                    <i class="fas fa-percent"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-muted text-sm">
+                <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
+                <span class="text-nowrap">Since last month</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 class="mb-0">Mathematico Logical & Drawing Talents</h3>
+        </div>
+        
+        <div class="card-body">
+          <form #analysisForm="ngForm" (ngSubmit)="onSubmit(analysisForm)">
+            <!-- API Selection -->
+            <div class="form-group">
+              <label class="form-control-label">Select Analysis API</label>
+              <select 
+                class="form-control" 
+                [(ngModel)]="selectedApi"
+                name="selectedApi"
+                required
+              >
+                <option value="maha">Drawing Analysis</option>
+                <option value="achref">Shapes Analysis</option>
+                <option value="idriss">LLM Math test</option>
+                <option value="heni">Image Math Analysis</option>
+              </select>
+            </div>
+
+            <!-- File Upload -->
+            <div class="form-group">
+              <label class="form-control-label">Upload Image/Test Paper</label>
+              <div class="custom-file">
+                <input 
+                  type="file" 
+                  class="custom-file-input" 
+                  id="imageUpload"
+                  accept="image/*" 
+                  required
+                  (change)="onFileSelected($event)"
+                  [disabled]="isLoading"
+                >
+                <label class="custom-file-label" for="imageUpload">
+                  {{ selectedFileName }}
+                </label>
+              </div>
+              <small class="form-text text-muted">
+                Supported formats: JPEG, PNG, PDF (max 5MB)
+              </small>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+              <button 
+                type="submit" 
+                class="btn btn-danger btn-lg bg-gradient-danger"
+                [disabled]="!analysisForm.valid || isLoading"
+              >
+                <span *ngIf="!isLoading">
+                  <i class="fas fa-brain mr-2"></i>Analyze Content
+                </span>
+                <span *ngIf="isLoading">
+                  <i class="fas fa-spinner fa-spin mr-2"></i>Analyzing...
+                </span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Error Message -->
+          <div *ngIf="error" class="alert alert-danger mt-4">
+            <h4 class="alert-heading">Error!</h4>
+            {{ error }}
+            <button class="btn btn-link text-white" (click)="error = null">Dismiss</button>
+          </div>
+
+          <!-- Result Display -->
+          <div *ngIf="result" class="alert alert-success mt-4">
+            <div class="d-flex align-items-center">
+              <div class="mr-3">
+                <i class="fas fa-rocket fa-2x"></i>
+              </div>
+              <div>
+                <h4 class="alert-heading">Analysis Complete! 🚀</h4>
+                <div class="analysis-result">
+                  {{ result }}
+                </div>
+                <hr>
+                <div class="mb-0">
+                  <button class="btn btn-sm btn-success" (click)="result = null">
+                    <i class="fas fa-redo mr-1"></i>New Analysis
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Custom styling for form elements */
+  .form-control-label {
+    font-weight: 600;
+    color: #3d3d3d;
+  }
+  
+  .analysis-result {
+    background: rgba(255,255,255,0.1);
+    border-left: 3px solid rgb(225, 255, 242);
+    padding: 1rem;
+    border-radius: 5px;
+  }
+  
+  .custom-file-label::after {
+    background-color: #f5365c;
+    color: white;
+    border-left: 0;
+  }
+  
+  .btn-danger {
+    transition: all 0.3s ease;
+    padding: 12px 30px;
+    border-radius: 25px;
+  }
+  
+  .btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(245, 54, 92, 0.4);
+  }
+</style>

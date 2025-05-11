@@ -24,9 +24,83 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.files.storage import FileSystemStorage
 import librosa
 
-#!Idriss Api Call to Ollama wakahaou
-MODEL_NAME= "qwen3:0.6b"
+#! Idriss API Call to Ollama
+import os
+import requests
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
+# Configuration
+OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
+MODEL_NAME = os.getenv("MODEL_NAME", "qwen3:0.6b")
+
+
+def call_ollama(prompt: str, model: str = MODEL_NAME, timeout: int = 60) -> str:
+    """
+    Calls Ollama's native /api/generate in streaming mode and
+    concatenates all 'response' chunks until done == True.
+    """
+    url = f"{OLLAMA_URL}/api/generate"
+    payload = {"model": model, "prompt": prompt}
+
+    try:
+        with requests.post(url, json=payload, timeout=timeout, stream=True) as resp:
+            resp.raise_for_status()
+
+            collected = []
+            for line in resp.iter_lines(decode_unicode=True):
+                if not line:
+                    continue
+                try:
+                    chunk = json.loads(line)
+                    collected.append(chunk.get("response", ""))
+                    if chunk.get("done", False):
+                        break
+                except json.JSONDecodeError:
+                    continue
+
+            return "".join(collected).strip()
+
+    except requests.RequestException as e:
+        raise RuntimeError(f"Failed to reach Ollama API: {e}")
+
+
+@csrf_exempt
+def generate_text_view(request):
+    """
+    Django view to handle text generation requests with separate 'think' and 'response' fields.
+    """
+    if request.method != "POST":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+
+    try:
+        payload = json.loads(request.body.decode("utf-8") or "{}")
+        prompt = payload.get("prompt", "Explain mathematics in 3 words")
+        text = call_ollama(prompt)
+
+        # Separate the 'think' and 'response' sections
+        if "<think>" in text and "</think>" in text:
+            think_start = text.find("<think>") + len("<think>")
+            think_end = text.find("</think>")
+            think_text = text[think_start:think_end].strip().replace("\\n", " ").replace("\\", "")
+            response_text = text[think_end + len("</think>"):].strip().replace("\\n", " ").replace("\\", "")
+        else:
+            think_text = "No explicit thinking found."
+            response_text = text.strip().replace("\\n", " ").replace("\\", "")
+
+        # Construct the JSON response
+        return JsonResponse({
+            "model": MODEL_NAME,
+            "prompt": prompt,
+            "think": think_text,
+            "response": response_text
+        })
+
+    except requests.exceptions.RequestException as e:
+        return JsonResponse({"error": f"Ollama request failed: {e}"}, status=502)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
 
 
 #!Travail Maha

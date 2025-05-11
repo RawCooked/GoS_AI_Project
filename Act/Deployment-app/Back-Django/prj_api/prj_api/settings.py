@@ -28,9 +28,11 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'MathematicoLogical/static')]
 SECRET_KEY = 'django-insecure-xm6o8+g!r8%+srgt37g=b$zc%_&xz61^k&g=a4e_on7au)(&ik'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*','192.168.1.65']
+
+
 
 
 # Application definition
@@ -58,6 +60,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -65,7 +68,15 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://localhost:4200",
     "http://127.0.0.1:4200",
+    "http://0.0.0.0:4200",
+    "http://localhost:4200",
+    "http://192.168.1.65:4200",
+
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+
 
 ROOT_URLCONF = 'prj_api.urls'
 
