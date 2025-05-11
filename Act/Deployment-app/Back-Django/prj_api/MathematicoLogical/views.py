@@ -33,7 +33,7 @@ MODEL_NAME= "qwen3:0.6b"
 
 
 # Charger le modèle MobileNetV2 sauvegardé
-MODEL_PATH = os.path.join(os.path.dirname(__file__), 'model.h5')
+MODEL_PATH = os.path.join(os.path.dirname(__file__), 'models/model.h5')
 model = load_model(MODEL_PATH)
 
 # Pour preprocessing MobileNetV2
@@ -96,7 +96,7 @@ def predict_view(request):
 
 
 # Audio model constants and loading (add this with your other model loading)
-AUDIO_MODEL_PATH = os.path.join(os.path.dirname(__file__), 'belle_voix_model.h5')
+AUDIO_MODEL_PATH = os.path.join(os.path.dirname(__file__), 'models/belle_voix_model.h5')
 audio_model = load_audio_model(AUDIO_MODEL_PATH)
 
 # Audio constants
@@ -177,7 +177,7 @@ def load_torch_model():
         # If using a standard ResNet
         with torch.serialization.safe_globals([models.resnet.ResNet]):
             model = torch.load(
-                'MathematicoLogical/my_model.pt',
+                'MathematicoLogical/models/my_model.pt',
                 map_location=torch.device('cpu'),
                 weights_only=False
             )
