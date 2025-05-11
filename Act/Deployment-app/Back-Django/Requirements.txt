@@ -2,3 +2,16 @@ django
 djangorestframework
 django-cors-headers
 requests
+pillow
+pytesseract 
+pillow 
+tensorflow>=2.9
+transformers 
+torch
+accelerate>=0.26.0
+bitsandbytes
+fastapi
+uvicorn
+librosa
+numpy
+python-multipart
